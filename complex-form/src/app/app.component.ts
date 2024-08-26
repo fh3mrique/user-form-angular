@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CountriesService } from './services/countries.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'complex-form';
+export class AppComponent implements OnInit {
+  
+  constructor(private readonly _countriesService: CountriesService){}
+  
+  ngOnInit(){
+    this._countriesService.getContries().subscribe((contriesResponse) => {
+      console.log('contriesResponse', contriesResponse )
+    });
+  }
 }
