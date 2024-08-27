@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { MaritalStatusEnum } from "../enums/marital-status.enum";
 import { PhoneTypeEnum } from "../enums/phone-type.enum";
 import { AddressStatusEnum } from "../enums/address-type.enum";
+import { UsersListResponse } from "../types/users-list-response";
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { AddressStatusEnum } from "../enums/address-type.enum";
 })
 export class UsersService {
 
-    private readonly usersList: any[] = [
+    private readonly usersList: UsersListResponse = [
         {
             name: 'Fulano',
             email: 'fulano@hotmail.com',
@@ -142,11 +143,12 @@ export class UsersService {
         }
     ];
 
+
     getUsers() {
-        return new Observable((observer) => {
+        return new Observable<UsersListResponse>((observer) => {
             setTimeout(() => {
-                observer.next([this.usersList]);
+                observer.next(this.usersList);
             }, 500);
-        })
+        });
     }
 }
