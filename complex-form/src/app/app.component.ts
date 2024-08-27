@@ -3,6 +3,8 @@ import { CountriesService } from './services/countries.service';
 import { StatesService } from './services/states.service';
 import { CitiesService } from './services/cities.service';
 import { UsersService } from './services/users.service';
+import { UsersListResponse } from './types/users-list-response';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,8 @@ import { UsersService } from './services/users.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  usersList: UsersListResponse = [];
   
   constructor(
     private readonly _countriesService: CountriesService,
@@ -31,8 +35,8 @@ export class AppComponent implements OnInit {
         console.log('getCities', citiesResponse)
     })
 
-    this._usersService.getUsers().subscribe((usersListResponse)=>{
-      console.log('getUsers', usersListResponse)
+    this._usersService.getUsers().pipe(take(1)).subscribe((usersListResponse)=>{
+      this.usersList = usersListResponse
     })
   }
 }
