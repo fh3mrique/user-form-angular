@@ -14,6 +14,7 @@ import { take } from 'rxjs';
 export class AppComponent implements OnInit {
 
   usersList: UsersListResponse = [];
+  currentTabIndex: number = 0;
   
   constructor(
     private readonly _countriesService: CountriesService,
