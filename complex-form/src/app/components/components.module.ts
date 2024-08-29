@@ -6,6 +6,7 @@ import { CommonModule } from "@angular/common";
 import { GeneralInformationComponent } from './general-information/general-information.component';
 import { UserInfoItemComponent } from './user-info-item/user-info-item.component';
 import { ContactInformationsComponent } from './contact-informations/contact-informations.component';
+import { PhoneListComponent } from './contact-informations/components/phone-list/phone-list.component';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { ContactInformationsComponent } from './contact-informations/contact-inf
     GeneralInformationComponent,
     UserInfoItemComponent,
     ContactInformationsComponent,
+    PhoneListComponent,
   ],
     imports: [
         AngularMaterialModule,

@@ -1,10 +1,7 @@
 <div class="p-4 grid gap-4">
     <p class="text-2xl font-semibold">Telefones</p>
-    <div class="p-4 grid gap-4 lg:grid-cols-3">
-        <app-user-info-item title="Residencial" text="+55 11 1232-9432"></app-user-info-item>
-        <app-user-info-item title="Celular" text="+55 11 1232-9432"></app-user-info-item>
-        <app-user-info-item title="Emergecial" text="--"></app-user-info-item>
-    </div>
+    <app-phone-list [userPhoneList]="user?.phoneList"></app-phone-list>
+    
     <p class="text-2xl font-semibold">Endereços</p>
     <div class="p-4 grid sm:grid-cols-2 lg:grid-cols-6">
         <app-user-info-item title="Tipo" text="Residencial"></app-user-info-item>

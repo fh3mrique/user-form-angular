@@ -1,6 +1,6 @@
+import { PhoneList } from "src/app/types/phone-list";
 import { IAddress } from "./address.interface";
 import { IDependent } from "./dependent.interface";
-import { Iphone } from "./phone.interface";
 
 export interface IUser {
     name: string,
@@ -10,7 +10,7 @@ export interface IUser {
     maritalStatus: number,
     monthlyIncome: number,
     birthDate: string,
-    phoneList: Iphone[],
+    phoneList: PhoneList,
     addressList: IAddress[],
     dependentsList: IDependent[],
 }
