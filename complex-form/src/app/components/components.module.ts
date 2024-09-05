@@ -10,6 +10,7 @@ import { PhoneListComponent } from './contact-informations/components/phone-list
 import { AddressListComponent } from './contact-informations/components/address-list/address-list.component';
 import { DependentsListComponent } from './dependents-list/dependents-list.component';
 import { ButtonsContainerComponent } from './buttons-container/buttons-container.component';
+import { UserInformationsContainerComponent } from './user-informations-container/user-informations-container.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { ButtonsContainerComponent } from './buttons-container/buttons-container
     AddressListComponent,
     DependentsListComponent,
     ButtonsContainerComponent,
+    UserInformationsContainerComponent,
   ],
     imports: [
         AngularMaterialModule,
@@ -32,7 +34,8 @@ import { ButtonsContainerComponent } from './buttons-container/buttons-container
       GeneralInformationComponent,
       ContactInformationsComponent,
       DependentsListComponent,
-      ButtonsContainerComponent
+      ButtonsContainerComponent,
+      UserInformationsContainerComponent
     ],
 })
 export class ComponentsModule {
