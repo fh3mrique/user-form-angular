@@ -15,6 +15,8 @@ export class UserFormController {
     }
 
     fullFillUserForm(user: IUser) {
+        this.resetUserForm();
+
         this.fulFillGeneralInformations(user);
 
         this.fulFillPhoneList(user.phoneList);
@@ -25,6 +27,8 @@ export class UserFormController {
 
         console.log(this.userForm)
     }
+
+    
 
 
     get generalInformations(): FormGroup {
@@ -78,6 +82,22 @@ export class UserFormController {
                 document: [dependent.document, Validators.required],
             }))
         })
+    }
+
+    private resetUserForm() {
+        this.userForm.reset();
+
+        this.generalInformations.reset();
+
+        this.phonelist.reset();
+        this.phonelist.clear();
+
+
+        this.addressList.reset();
+        this.addressList.clear();
+
+        this.dependentsList.reset();
+        this.dependentsList.clear();
     }
 
     private createUserForm() {
