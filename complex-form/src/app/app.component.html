@@ -5,6 +5,14 @@
       <app-users-list [usersList]="usersList" (onUserSelected)="onUserSelected($event)">
 
       </app-users-list>
+
+      <app-buttons-container 
+      [isInEditMode]="isInEditMode" 
+      (onEditButton)="onEditButton()"
+      (onCancelButton)="onCancelButton()"
+      *ngIf="userSelectedIndex !== undefined">
+    </app-buttons-container>
+
       <mat-tab-group [(selectedIndex)]="currentTabIndex" *ngIf="userSelectedIndex !== undefined">
         <mat-tab label="Geral">
           <app-general-information [user]="userSelected"></app-general-information>
@@ -12,7 +20,7 @@
         <mat-tab label="Contato">
           <app-contact-informations [user]="userSelected"></app-contact-informations>
         </mat-tab>
-        <mat-tab label="Dependente"> 
+        <mat-tab label="Dependente">
           <app-dependents-list [dependentsList]="userSelected.dependentsList"></app-dependents-list>
         </mat-tab>
       </mat-tab-group>

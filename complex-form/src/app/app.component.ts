@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   userSelectedIndex: number | undefined;
   userSelected: IUser = {} as IUser;
   
+  isInEditMode: boolean = false;
+  
   constructor(
     private readonly _countriesService: CountriesService,
     private readonly _statesService: StatesService,
@@ -53,5 +55,13 @@ export class AppComponent implements OnInit {
       this.userSelected = structuredClone(userFound)
       this.currentTabIndex = 0
     }
+  }
+
+  onEditButton(){
+    this.isInEditMode = true;
+  }
+
+  onCancelButton(){
+    this.isInEditMode = false;
   }
 }
