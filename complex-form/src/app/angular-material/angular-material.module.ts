@@ -4,6 +4,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
     imports: [
@@ -11,15 +14,21 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatTabsModule,
         MatInputModule,
         MatFormFieldModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatRadioModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     exports: [
         MatCardModule,
         MatTabsModule,
         MatInputModule,
         MatFormFieldModule,
-        MatAutocompleteModule
-    ]
+        MatAutocompleteModule,
+        MatRadioModule, 
+        MatDatepickerModule
+    ], 
+    
 })
 export class AngularMaterialModule {
 
