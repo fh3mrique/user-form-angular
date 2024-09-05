@@ -7,7 +7,7 @@ import { IUser } from 'src/app/interfaces/user/user.interface';
   styleUrls: ['./user-informations-container.component.scss']
 })
 export class UserInformationsContainerComponent implements OnChanges {
-  currentTabIndex:number = 0;
+  currentTabIndex:number = 1;
 
   @Input({required: true}) userSelected: IUser = {} as IUser;
 
