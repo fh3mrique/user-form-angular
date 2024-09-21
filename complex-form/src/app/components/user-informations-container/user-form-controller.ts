@@ -7,6 +7,7 @@ import { PhoneList } from "src/app/types/phone-list";
 
 export class UserFormController {
     userForm!: FormGroup;
+    private  emailPattern = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
 
     private _fb = inject(FormBuilder);
 
@@ -104,7 +105,7 @@ export class UserFormController {
         this.userForm = this._fb.group({
             generalInformations: this._fb.group({
                 name: ['', Validators.required],
-                email: ['', Validators.required],
+                email: ['', [Validators.required, Validators.pattern(this.emailPattern)] ],
                 country: ['', Validators.required],
                 state: ['', Validators.required],
                 maritalStatus: [null, Validators.required],
