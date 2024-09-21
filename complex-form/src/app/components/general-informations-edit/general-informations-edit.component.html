@@ -21,9 +21,9 @@
                 placeholder="Brazil" 
                 matInput [matAutocomplete]="autoCountry" 
                 formControlName="country">
-                <mat-autocomplete #autoCountry="matAutocomplete">
+                <mat-autocomplete #autoCountry="matAutocomplete" (optionSelected)="onCountrySelected($event)">
     
-                    <mat-option *ngFor="let op of []">{{''}}</mat-option>
+                    <mat-option *ngFor="let country of countriesListFiltred" [value]="country.name" >{{country.name}}</mat-option>
     
                 </mat-autocomplete>
             </mat-form-field>
