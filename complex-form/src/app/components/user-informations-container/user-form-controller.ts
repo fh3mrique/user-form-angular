@@ -105,7 +105,7 @@ export class UserFormController {
             generalInformations: this._fb.group({
                 name: ['', Validators.required],
                 email: ['', Validators.required],
-                county: ['', Validators.required],
+                country: ['', Validators.required],
                 state: ['', Validators.required],
                 maritalStatus: [null, Validators.required],
                 monthlyIncome: [null, Validators.required],
