@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CountriesList } from 'src/app/types/countries-list';
 
 
 @Component({
@@ -7,11 +8,16 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './general-informations-edit.component.html',
   styleUrls: ['./general-informations-edit.component.scss']
 })
-export class GeneralInformationsEditComponent {
+export class GeneralInformationsEditComponent implements OnChanges {
 
-  @Input({required: true}) userForm!: FormGroup; 
+  @Input({ required: true }) userForm!: FormGroup;
+  @Input({ required: true }) countriesList: CountriesList = [];
 
-  get emailControl() : FormControl {
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+  }
+
+  get emailControl(): FormControl {
     return this.userForm.get('generalInformations.email') as FormControl
   }
 
