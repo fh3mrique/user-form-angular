@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { CountriesList } from 'src/app/types/countries-list';
 import { StatesList } from 'src/app/types/states-list';
+import { maritalStatusArray } from 'src/app/utils/marital-status-deescription-map';
 
 
 @Component({
@@ -31,6 +32,10 @@ export class GeneralInformationsEditComponent implements OnInit, OnChanges {
     console.log(changes);
     this.countriesListFiltred = this.countriesList;
     this.statesListFiltred = this.statesList;
+  }
+
+  get maritalStatusArray() {
+    return maritalStatusArray;
   }
 
   get emailControl(): FormControl {
