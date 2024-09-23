@@ -6,7 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
+import { MAT_DATE_LOCALE, NativeDateAdapter } from "@angular/material/core";
 
 @NgModule({
     imports: [
@@ -27,7 +28,11 @@ import {MatNativeDateModule} from '@angular/material/core';
         MatAutocompleteModule,
         MatRadioModule, 
         MatDatepickerModule
-    ], 
+    ],
+    providers: [
+     NativeDateAdapter,
+     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+    ] 
     
 })
 export class AngularMaterialModule {
