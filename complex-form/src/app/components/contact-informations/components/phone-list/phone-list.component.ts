@@ -1,9 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { PhoneTypeEnum } from 'src/app/enums/phone-type.enum';
 import { IPhoneToDisplay } from 'src/app/interfaces/phone-to-display.interface';
-import { Iphone } from 'src/app/interfaces/user/phone.interface';
 import { PhoneList } from 'src/app/types/phone-list';
-import { phoneTypeDescriptionMap } from 'src/app/utils/phone-type-description-map';
+import { preparePhoneList } from 'src/app/utils/prepare-phone-list';
 
 @Component({
   selector: 'app-phone-list',
@@ -25,21 +23,21 @@ export class PhoneListComponent implements OnChanges {
   preparePhoneListToDisplay() {
     this.phoneListToDisplay = [];
 
-    Object.keys(phoneTypeDescriptionMap).map(Number).forEach((phoneType: number) => {
+    const originalUserPhoneList = this.userPhoneList && this.userPhoneList.length > 0 ? this.userPhoneList : [];
+
+    preparePhoneList(originalUserPhoneList, (phone) => {
+      this.phoneListToDisplay.push(phone);
+    })
+
+    /* Object.keys(phoneTypeDescriptionMap).map(Number).forEach((phoneType: number) => {
       const phoneFound = this.userPhoneList?.find((userPhone: Iphone) => userPhone.type === phoneType);
 
       this.phoneListToDisplay.push({
         type: phoneTypeDescriptionMap[phoneType as PhoneTypeEnum],
         phoneNumber: phoneFound ? this.formatPhoneNumber(phoneFound) : '-',
       })
-    })
+    }) */
 
     console.log(this.phoneListToDisplay)
   }
-
-  formatPhoneNumber(phone: Iphone) {
-
-    return `${phone.internationalCode} ${phone.areaCode} ${phone.number}`;
-  }
-
 }
