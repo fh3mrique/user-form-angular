@@ -17,9 +17,10 @@ import { PhoneListEditComponent } from './contact-informations-edit/components/p
 import { AddressListEditComponent } from './contact-informations-edit/components/address-list-edit/address-list-edit.component';
 import { DependentsListEditComponent } from './dependents-list-edit/dependents-list-edit.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { NgxMaskDirective, provideNgxMask } from "ngx-mask";
 
 @NgModule({
-    declarations: [
+  declarations: [
     UsersListComponent,
     GeneralInformationComponent,
     UserInfoItemComponent,
@@ -35,20 +36,24 @@ import { ReactiveFormsModule } from "@angular/forms";
     AddressListEditComponent,
     DependentsListEditComponent,
   ],
-    imports: [
-        AngularMaterialModule,
-        PipesModule,
-        CommonModule,
-        ReactiveFormsModule
-    ],
-    exports: [
-      UsersListComponent,
-      GeneralInformationComponent,
-      ContactInformationsComponent,
-      DependentsListComponent,
-      ButtonsContainerComponent,
-      UserInformationsContainerComponent
-    ],
+  imports: [
+    AngularMaterialModule,
+    PipesModule,
+    CommonModule,
+    ReactiveFormsModule,
+    NgxMaskDirective
+  ],
+  exports: [
+    UsersListComponent,
+    GeneralInformationComponent,
+    ContactInformationsComponent,
+    DependentsListComponent,
+    ButtonsContainerComponent,
+    UserInformationsContainerComponent
+  ],
+  providers: [
+    provideNgxMask(),
+  ]
 })
 export class ComponentsModule {
 
