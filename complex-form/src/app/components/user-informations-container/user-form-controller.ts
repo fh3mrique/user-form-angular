@@ -1,14 +1,16 @@
 import { inject } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { PhoneTypeEnum } from "src/app/enums/phone-type.enum";
 import { IUser } from "src/app/interfaces/user/user.interface";
 import { AddressList } from "src/app/types/address-list";
 import { DependentsList } from "src/app/types/dependents-list";
 import { PhoneList } from "src/app/types/phone-list";
 import { convertPtBrDateToDateObj } from "src/app/utils/convert-pt-br-date-to-date-obj";
+import { preparePhoneList } from "src/app/utils/prepare-phone-list";
 
 export class UserFormController {
     userForm!: FormGroup;
-    private  emailPattern = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+    private emailPattern = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
 
     private _fb = inject(FormBuilder);
 
@@ -29,9 +31,6 @@ export class UserFormController {
 
         console.log(this.userForm)
     }
-
-    
-
 
     get generalInformations(): FormGroup {
         return this.userForm.get('generalInformations') as FormGroup;
@@ -57,14 +56,23 @@ export class UserFormController {
     }
 
     private fulFillPhoneList(userPhoneList: PhoneList) {
-        userPhoneList.forEach((phone) => {
+        preparePhoneList(userPhoneList, false, (phone) => {
+            const phoneValidators = phone.type === PhoneTypeEnum.EMERGENCY ? [] : [Validators.required];
+            this.phonelist.push(this._fb.group({
+                type: [phone.type],
+                typeDescription: [phone.typeDescription],
+                Number: [phone.phoneNumber, phoneValidators],
+            }))
+
+        })
+      /*   userPhoneList.forEach((phone) => {
             this.phonelist.push(this._fb.group({
                 type: [phone.type, Validators.required],
                 areaCode: [phone.areaCode, Validators.required],
                 internationalCode: [phone.internationalCode, Validators.required],
                 number: [phone.number, Validators.required],
             }))
-        })
+        }) */
     }
 
     private fulFillAddressList(userAddressList: AddressList) {
@@ -110,7 +118,7 @@ export class UserFormController {
         this.userForm = this._fb.group({
             generalInformations: this._fb.group({
                 name: ['', Validators.required],
-                email: ['', [Validators.required, Validators.pattern(this.emailPattern)] ],
+                email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
                 country: ['', Validators.required],
                 state: ['', Validators.required],
                 maritalStatus: [null, Validators.required],
