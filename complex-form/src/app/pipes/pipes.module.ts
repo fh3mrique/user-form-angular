@@ -2,18 +2,21 @@ import { NgModule } from "@angular/core";
 import { MaritalStatusPipe } from './marital-status.pipe';
 import { CpfPipe } from './cpf.pipe';
 import { PhoneMaskPipe } from './phone-mask.pipe';
+import { PhonePlaceholderPipe } from './phone-placeholder.pipe';
 
 @NgModule({
     declarations: [
     MaritalStatusPipe,
     CpfPipe,
-    PhoneMaskPipe
+    PhoneMaskPipe,
+    PhonePlaceholderPipe
   ],
     imports: [],
     exports: [
       MaritalStatusPipe,
       CpfPipe,
-      PhoneMaskPipe
+      PhoneMaskPipe,
+      PhonePlaceholderPipe
     ]
 })
 export class PipesModule {

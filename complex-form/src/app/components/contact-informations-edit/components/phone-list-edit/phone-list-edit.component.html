@@ -3,7 +3,7 @@
         <ng-container formArrayName="phoneList">
             <mat-form-field class="w-full" *ngFor="let phone of phoneList.controls; let i = index" [formGroupName]="i">
                 <mat-label>{{phoneList.value[i].typeDescription}}</mat-label>
-                <input matInput placeholder="+54 8848-2334" [mask]="phoneList.value[i].type | phoneMask" formControlName="Number">
+                <input matInput [placeholder]="phoneList.value[i].type | phonePlaceholder" [mask]="phoneList.value[i].type | phoneMask" formControlName="Number">
             </mat-form-field>
         </ng-container>       
     </ng-container>
