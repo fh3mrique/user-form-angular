@@ -4,6 +4,8 @@
             <mat-form-field class="w-full" *ngFor="let phone of phoneList.controls; let i = index" [formGroupName]="i">
                 <mat-label>{{phoneList.value[i].typeDescription}}</mat-label>
                 <input matInput [placeholder]="phoneList.value[i].type | phonePlaceholder" [mask]="phoneList.value[i].type | phoneMask" formControlName="Number">
+                <mat-error *ngIf="phone.get('Number')?.hasError('required')">O Telefone é obrigatório.</mat-error>
+                <mat-error *ngIf="phone.get('Number')?.hasError('mask')">O Telefone é inválido.</mat-error>
             </mat-form-field>
         </ng-container>       
     </ng-container>
