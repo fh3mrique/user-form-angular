@@ -8,6 +8,7 @@ import { PhoneList } from "src/app/types/phone-list";
 import { convertPtBrDateToDateObj } from "src/app/utils/convert-pt-br-date-to-date-obj";
 import { prepareAddressList } from "src/app/utils/prepare-address-list";
 import { preparePhoneList } from "src/app/utils/prepare-phone-list";
+import { requiredAddressValidator } from "src/app/utils/user-form-validators/required-address-validator";
 
 export class UserFormController {
     userForm!: FormGroup;
@@ -76,8 +77,8 @@ export class UserFormController {
           }) */
     }
 
+    
     private fulFillAddressList(userAddressList: AddressList) {
-
         prepareAddressList(userAddressList, false, (address) => {
             this.addressList.push(this._fb.group({
                 type: [address.type],
@@ -87,10 +88,14 @@ export class UserFormController {
                 country: [address.country],
                 state: [address.state],
                 city: [address.city],
-            }))  
+            }, {
+                validators: requiredAddressValidator
+            }));
         });
-       console.log('addressList:', this.addressList)
+
+        console.log('addressList', this.addressList);
     }
+
 
     fulFillDependentsList(userDependentsList: DependentsList) {
         userDependentsList.forEach((dependent) => {
