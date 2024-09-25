@@ -1,86 +1,39 @@
-<div class="grid">
-    <div class="my-4 grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
-        <mat-form-field class="w-full">
-            <mat-label>Tipo:</mat-label>
-            <input matInput placeholder="Residencial" value="Residencial">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Rua:</mat-label>
-            <input matInput placeholder="Rua de tal" value="Rua de tal">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Complemento:</mat-label>
-            <input matInput placeholder="Proximo ao parque" value="Proximo ao parque">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>País:</mat-label>
-            <input matInput placeholder="Brazil" value="Brazil">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Estado:</mat-label>
-            <input matInput placeholder="São Paulo" value="São Paulo">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Cidade:</mat-label>
-            <input matInput placeholder="Ribeirão Preto" value="Ribeirão Preto">
-        </mat-form-field>
-    </div>
+<form [formGroup]="userForm">
+    <ng-container formGroupName="contactInformations">
+        <ng-container formGroupName="addressList">
+            <ng-container *ngFor="let address of addressList.controls; let i = index" [formGroupName]="i">
+                <div class="my-4 grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
+                    <mat-form-field class="w-full">
+                        <mat-label>Tipo:</mat-label>
+                        <input matInput formControlName="typeDescription">
+                    </mat-form-field>
+                    <mat-form-field class="w-full">
+                        <mat-label>Rua:</mat-label>
+                        <input matInput formControlName="street">
+                    </mat-form-field>
+                    <mat-form-field class="w-full">
+                        <mat-label>Complemento:</mat-label>
+                        <input matInput formControlName="complement">
+                    </mat-form-field>
+                    <mat-form-field class="w-full">
+                        <mat-label>País:</mat-label>
+                        <input matInput formControlName="country">
+                    </mat-form-field>
+                    <mat-form-field class="w-full">
+                        <mat-label>Estado:</mat-label>
+                        <input matInput formControlName="state">
+                    </mat-form-field>
+                    <mat-form-field class="w-full">
+                        <mat-label>Cidade:</mat-label>
+                        <input matInput formControlName="city">
+                    </mat-form-field>
+                </div>
 
-    <hr class="block lg:hidden">
-    <div class="my-4 grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
-        <mat-form-field class="w-full">
-            <mat-label>Tipo:</mat-label>
-            <input matInput placeholder="Residencial" value="Residencial">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Rua:</mat-label>
-            <input matInput placeholder="Rua de tal" value="Rua de tal">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Complemento:</mat-label>
-            <input matInput placeholder="Proximo ao parque" value="Proximo ao parque">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>País:</mat-label>
-            <input matInput placeholder="Brazil" value="Brazil">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Estado:</mat-label>
-            <input matInput placeholder="São Paulo" value="São Paulo">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Cidade:</mat-label>
-            <input matInput placeholder="Ribeirão Preto" value="Ribeirão Preto">
-        </mat-form-field>
-    </div>
+                <hr class="block lg:hidden">
+            </ng-container>
 
-    <hr class="block lg:hidden">
-    <div class="my-4 grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-6">
-        <mat-form-field class="w-full">
-            <mat-label>Tipo:</mat-label>
-            <input matInput placeholder="Residencial" value="Residencial">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Rua:</mat-label>
-            <input matInput placeholder="Rua de tal" value="Rua de tal">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Complemento:</mat-label>
-            <input matInput placeholder="Proximo ao parque" value="Proximo ao parque">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>País:</mat-label>
-            <input matInput placeholder="Brazil" value="Brazil">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Estado:</mat-label>
-            <input matInput placeholder="São Paulo" value="São Paulo">
-        </mat-form-field>
-        <mat-form-field class="w-full">
-            <mat-label>Cidade:</mat-label>
-            <input matInput placeholder="Ribeirão Preto" value="Ribeirão Preto">
-        </mat-form-field>
-    </div>
+        </ng-container>
 
-    <hr class="block lg:hidden">
-</div>
+    </ng-container>
+
+</form>
