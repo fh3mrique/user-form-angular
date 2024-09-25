@@ -6,6 +6,7 @@ import { AddressList } from "src/app/types/address-list";
 import { DependentsList } from "src/app/types/dependents-list";
 import { PhoneList } from "src/app/types/phone-list";
 import { convertPtBrDateToDateObj } from "src/app/utils/convert-pt-br-date-to-date-obj";
+import { prepareAddressList } from "src/app/utils/prepare-address-list";
 import { preparePhoneList } from "src/app/utils/prepare-phone-list";
 
 export class UserFormController {
@@ -65,27 +66,30 @@ export class UserFormController {
             }))
 
         })
-      /*   userPhoneList.forEach((phone) => {
-            this.phonelist.push(this._fb.group({
-                type: [phone.type, Validators.required],
-                areaCode: [phone.areaCode, Validators.required],
-                internationalCode: [phone.internationalCode, Validators.required],
-                number: [phone.number, Validators.required],
-            }))
-        }) */
+        /*   userPhoneList.forEach((phone) => {
+              this.phonelist.push(this._fb.group({
+                  type: [phone.type, Validators.required],
+                  areaCode: [phone.areaCode, Validators.required],
+                  internationalCode: [phone.internationalCode, Validators.required],
+                  number: [phone.number, Validators.required],
+              }))
+          }) */
     }
 
     private fulFillAddressList(userAddressList: AddressList) {
-        userAddressList.forEach((address) => {
+
+        prepareAddressList(userAddressList, false, (address) => {
             this.addressList.push(this._fb.group({
-                type: [address.type, Validators.required],
-                street: [address.street, Validators.required],
-                complement: [address.complement, Validators.required],
-                country: [address.country, Validators.required],
-                state: [address.state, Validators.required],
-                city: [address.city, Validators.required],
-            }))
-        })
+                type: [address.type],
+                typeDescription: [{ value: address.typeDescription, disabled: true }],
+                street: [address.street],
+                complement: [address.complement],
+                country: [address.country],
+                state: [address.state],
+                city: [address.city],
+            }))  
+        });
+       console.log('addressList:', this.addressList)
     }
 
     fulFillDependentsList(userDependentsList: DependentsList) {
