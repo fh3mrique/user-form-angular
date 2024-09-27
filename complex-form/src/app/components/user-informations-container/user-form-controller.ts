@@ -77,7 +77,7 @@ export class UserFormController {
           }) */
     }
 
-    
+
     private fulFillAddressList(userAddressList: AddressList) {
         prepareAddressList(userAddressList, false, (address) => {
             this.addressList.push(this._fb.group({
@@ -105,6 +105,10 @@ export class UserFormController {
                 document: [dependent.document, Validators.required],
             }))
         })
+    }
+
+    removeDependent(dependentIndex: number) {
+        this.dependentsList.removeAt(dependentIndex);
     }
 
     private resetUserForm() {
