@@ -13,7 +13,7 @@ import { requiredAddressValidator } from "src/app/utils/user-form-validators/req
 
 export class UserFormController {
     userForm!: FormGroup;
-    private emailPattern = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
+    private emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     private _fb = inject(FormBuilder);
 
@@ -32,6 +32,9 @@ export class UserFormController {
 
         this.fulFillDependentsList(user.dependentsList)
 
+        this.userForm.markAllAsTouched();
+        this.userForm.updateValueAndValidity();
+        
         console.log(this.userForm)
     }
 
@@ -47,6 +50,10 @@ export class UserFormController {
         return this.userForm.get('generalInformations') as FormGroup;
     }
 
+    get contactInformations(): FormGroup {
+        return this.userForm.get('contactInformations') as FormGroup;
+    }
+
     get phonelist(): FormArray {
         return this.userForm.get('contactInformations.phoneList') as FormArray;
     }
@@ -54,16 +61,29 @@ export class UserFormController {
     get addressList(): FormArray {
         return this.userForm.get('contactInformations.addressList') as FormArray;
     }
+
     get dependentsList(): FormArray {
         return this.userForm.get('dependentsList') as FormArray;
     }
 
+    get generalInformationsValid(): boolean {
+        return this.generalInformations.valid;
+    }
+
+    get contactInformationsValid(): boolean {
+        return this.contactInformations.valid;
+    }
+
+    get dependentsListValid(): boolean {
+        return this.dependentsList.valid;
+    }
 
     private fulFillGeneralInformations(user: IUser) {
         const newUser = {
             ...user,
-            birthDate: convertPtBrDateToDateObj(user.birthDate)
+            birthDate: convertPtBrDateToDateObj(user.birthDate),
         };
+
         this.generalInformations.patchValue(newUser);
     }
 
