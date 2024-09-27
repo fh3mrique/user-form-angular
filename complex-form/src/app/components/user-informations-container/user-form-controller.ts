@@ -1,6 +1,7 @@
 import { inject } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PhoneTypeEnum } from "src/app/enums/phone-type.enum";
+import { IDependent } from "src/app/interfaces/user/dependent.interface";
 import { IUser } from "src/app/interfaces/user/user.interface";
 import { AddressList } from "src/app/types/address-list";
 import { DependentsList } from "src/app/types/dependents-list";
@@ -34,6 +35,14 @@ export class UserFormController {
         console.log(this.userForm)
     }
 
+    removeDependent(dependentIndex: number) {
+        this.dependentsList.removeAt(dependentIndex);
+    }
+
+    addDependent() {
+        this.dependentsList.push(this.createDependentGroup());
+    }
+
     get generalInformations(): FormGroup {
         return this.userForm.get('generalInformations') as FormGroup;
     }
@@ -48,6 +57,7 @@ export class UserFormController {
     get dependentsList(): FormArray {
         return this.userForm.get('dependentsList') as FormArray;
     }
+
 
     private fulFillGeneralInformations(user: IUser) {
         const newUser = {
@@ -96,19 +106,27 @@ export class UserFormController {
         console.log('addressList', this.addressList);
     }
 
+    private createDependentGroup(dependent: IDependent | null = null) {
+        if (!dependent) {
+            this._fb.group({
+                name: ['', Validators.required],
+                age: ['', Validators.required],
+                document: ['', Validators.required],
+            });
+        }
 
-    fulFillDependentsList(userDependentsList: DependentsList) {
-        userDependentsList.forEach((dependent) => {
-            this.dependentsList.push(this._fb.group({
-                name: [dependent.name, Validators.required],
-                age: [dependent.age, Validators.required],
-                document: [dependent.document, Validators.required],
-            }))
+        return this._fb.group({
+            name: [dependent?.name, Validators.required],
+            age: [dependent?.age, Validators.required],
+            document: [dependent?.document, Validators.required],
         })
     }
 
-    removeDependent(dependentIndex: number) {
-        this.dependentsList.removeAt(dependentIndex);
+
+    fulFillDependentsList(userDependentsList: DependentsList) {
+        userDependentsList.forEach((dependent) => {
+            this.dependentsList.push(this.createDependentGroup(dependent));
+        })
     }
 
     private resetUserForm() {
