@@ -13,34 +13,37 @@ import { IUser } from './interfaces/user/user.interface';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   usersList: UsersListResponse = [];
 
   userSelectedIndex: number | undefined;
   userSelected: IUser = {} as IUser;
-  
+
   isInEditMode: boolean = false;
-  
+
+  enableSaveButton: boolean = false;
+
   constructor(
     private readonly _countriesService: CountriesService,
     private readonly _statesService: StatesService,
     private readonly _citiesService: CitiesService,
     private readonly _usersService: UsersService,
-  ){}
-  
-  ngOnInit(){
+  ) { }
+
+  ngOnInit() {
     this._countriesService.getContries().subscribe((contriesResponse) => {
-      console.log('contriesResponse', contriesResponse )
+      console.log('contriesResponse', contriesResponse)
     });
 
-    this._statesService.getStates('Brazil').subscribe((stateResponse)=>{
-        console.log('stateResponse', stateResponse)
+    this._statesService.getStates('Brazil').subscribe((stateResponse) => {
+      console.log('stateResponse', stateResponse)
     })
 
-    this._citiesService.getCities('Brazil', 'São Paulo').subscribe((citiesResponse) =>{
-        console.log('getCities', citiesResponse)
+    this._citiesService.getCities('Brazil', 'São Paulo').subscribe((citiesResponse) => {
+      console.log('getCities', citiesResponse)
     })
 
-    this._usersService.getUsers().pipe(take(1)).subscribe((usersListResponse)=>{
+    this._usersService.getUsers().pipe(take(1)).subscribe((usersListResponse) => {
       this.usersList = usersListResponse
     })
   }
@@ -49,17 +52,21 @@ export class AppComponent implements OnInit {
 
     const userFound = this.usersList[userIndex];
 
-    if (userFound){
+    if (userFound) {
       this.userSelectedIndex = userIndex;
       this.userSelected = structuredClone(userFound)
     }
   }
 
-  onEditButton(){
+  onEditButton() {
     this.isInEditMode = true;
   }
 
-  onCancelButton(){
+  onCancelButton() {
     this.isInEditMode = false;
+  }
+
+  onFormStatusChange(formStatus: boolean) {
+    setTimeout(() => this.enableSaveButton = formStatus, 0)
   }
 }
