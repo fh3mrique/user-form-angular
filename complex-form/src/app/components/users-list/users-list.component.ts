@@ -13,9 +13,14 @@ export class UsersListComponent {
   @Input({ required: true })
   usersList: UsersListResponse = [];
 
+  @Input({ required: true })
+  isInEditMode: boolean = false;
+
   @Output('onUserSelected') onUserSelectedEmitt = new EventEmitter<number>()
 
   onUserSelected(userIndex: number) {
+    if(this.isInEditMode) return;
+    
     this.userSelectedIndex = userIndex
 
     /* Quem implementar esse componente vai receber do usuário selecionado */
