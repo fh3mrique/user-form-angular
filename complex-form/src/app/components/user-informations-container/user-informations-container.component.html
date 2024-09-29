@@ -52,8 +52,12 @@
             >circle</mat-icon>
         </ng-template>
 
-        <app-dependents-list [dependentsList]="userSelected.dependentsList"></app-dependents-list>
-        <app-dependents-list-edit 
+        <app-dependents-list 
+            *ngIf="!isInEditMode"
+            [dependentsList]="userSelected.dependentsList">
+        </app-dependents-list>
+        <app-dependents-list-edit
+            *ngIf="isInEditMode"
             [userForm]="userForm"
             (onRemoveDependent)="removeDependent($event)"
             (onAddDependent)="addDependent()"

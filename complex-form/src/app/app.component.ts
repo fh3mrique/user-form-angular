@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
 
   enableSaveButton: boolean = false;
 
+  userFormUpdated: boolean = false;
+
   constructor(
     private readonly _countriesService: CountriesService,
     private readonly _statesService: StatesService,
@@ -69,4 +71,10 @@ export class AppComponent implements OnInit {
   onFormStatusChange(formStatus: boolean) {
     setTimeout(() => this.enableSaveButton = formStatus, 0)
   }
+
+  onUserFormFirstChange() {
+    console.log('onUserFormFirstChange');
+    this.userFormUpdated = true;
+  }
+
 }
