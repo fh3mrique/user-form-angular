@@ -25,14 +25,14 @@ export class UserInformationsContainerComponent extends UserFormController imple
   @Input({ required: true }) userSelected: IUser = {} as IUser;
   @Input({ required: true }) isInEditMode: boolean = false;
 
-  @Output('onFormStatusChange')  onFormStatusChangeEmitt = new EventEmitter<boolean>();
+  @Output('onFormStatusChange') onFormStatusChangeEmitt = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.onUserForStatusChange();
 
     this.getCountriesList()
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
     this.currentTabIndex = 0;
 
@@ -45,10 +45,25 @@ export class UserInformationsContainerComponent extends UserFormController imple
     }
   }
 
+  onCountrySelected(countryName: string) {
+    this.getStatesList(countryName);
+  }
+
+  mostrarForm(){
+    console.log(this.userForm);
+  }
+
+
   private getCountriesList() {
     this._countriesService.getContries().pipe(take(1)).subscribe((countriesList: CountriesList) => {
       this.countriesList = countriesList;
     });
+  }
+
+  private onUserForStatusChange() {
+    this.userForm.statusChanges
+      .pipe(distinctUntilChanged())
+      .subscribe(() => this.onFormStatusChangeEmitt.emit(this.userForm.valid));
   }
 
   getStatesList(country: string) {
@@ -57,13 +72,8 @@ export class UserInformationsContainerComponent extends UserFormController imple
     })
   }
 
-  onCountrySelected(countryName: string) {
-    this.getStatesList(countryName);
-  }
 
-  private onUserForStatusChange() {
-    this.userForm.statusChanges
-    .pipe(distinctUntilChanged())
-    .subscribe(() => this.onFormStatusChangeEmitt.emit(this.userForm.valid));
-  }
+
+
+
 }

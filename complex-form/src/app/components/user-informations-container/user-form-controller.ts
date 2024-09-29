@@ -40,10 +40,12 @@ export class UserFormController {
 
     removeDependent(dependentIndex: number) {
         this.dependentsList.removeAt(dependentIndex);
+        this.dependentsList.markAsDirty();
     }
-
+    
     addDependent() {
         this.dependentsList.push(this.createDependentGroup());
+        this.dependentsList.markAsDirty();
     }
 
     get generalInformations(): FormGroup {
