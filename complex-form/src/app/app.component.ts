@@ -6,6 +6,8 @@ import { UsersService } from './services/users.service';
 import { UsersListResponse } from './types/users-list-response';
 import { take } from 'rxjs';
 import { IUser } from './interfaces/user/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -26,25 +28,11 @@ export class AppComponent implements OnInit {
   userFormUpdated: boolean = false;
 
   constructor(
-    private readonly _countriesService: CountriesService,
-    private readonly _statesService: StatesService,
-    private readonly _citiesService: CitiesService,
     private readonly _usersService: UsersService,
+    private readonly _matDialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    this._countriesService.getContries().subscribe((contriesResponse) => {
-      console.log('contriesResponse', contriesResponse)
-    });
-
-    this._statesService.getStates('Brazil').subscribe((stateResponse) => {
-      console.log('stateResponse', stateResponse)
-    })
-
-    this._citiesService.getCities('Brazil', 'São Paulo').subscribe((citiesResponse) => {
-      console.log('getCities', citiesResponse)
-    })
-
     this._usersService.getUsers().pipe(take(1)).subscribe((usersListResponse) => {
       this.usersList = usersListResponse
     })
@@ -65,7 +53,24 @@ export class AppComponent implements OnInit {
   }
 
   onCancelButton() {
-    this.isInEditMode = false;
+    if (this.userFormUpdated) {
+      const dialogRef = this._matDialog.open(ConfirmationDialogComponent, {
+        data: {
+          title: 'O Formulário foi alterado',
+          message: 'Deseja realmente cancelar as alterações feitas no formulário?.'
+        }
+      });
+
+      dialogRef.afterClosed().subscribe((value: boolean) => {
+        if (!value) return;
+
+        this.isInEditMode = false;
+        this.userFormUpdated = false;
+      })
+      
+    } else {
+      this.isInEditMode = false;
+    }
   }
 
   onFormStatusChange(formStatus: boolean) {

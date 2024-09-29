@@ -6,10 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {DateAdapter, MatNativeDateModule} from '@angular/material/core';
+import { DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE, NativeDateAdapter } from "@angular/material/core";
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatIconModule } from '@angular/material/icon';
+import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
     imports: [
         MatCardModule,
@@ -20,7 +21,9 @@ import {MatIconModule} from '@angular/material/icon';
         MatRadioModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonModule, 
+        MatDialogModule
     ],
     exports: [
         MatCardModule,
@@ -28,15 +31,17 @@ import {MatIconModule} from '@angular/material/icon';
         MatInputModule,
         MatFormFieldModule,
         MatAutocompleteModule,
-        MatRadioModule, 
+        MatRadioModule,
         MatDatepickerModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonModule, 
+        MatDialogModule
     ],
     providers: [
-     NativeDateAdapter,
-     {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
-    ] 
-    
+        NativeDateAdapter,
+        { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }
+    ]
+
 })
 export class AngularMaterialModule {
 
