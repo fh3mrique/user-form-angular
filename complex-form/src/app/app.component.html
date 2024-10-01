@@ -10,7 +10,8 @@
       <app-buttons-container 
       [isInEditMode]="isInEditMode" 
       (onEditButton)="onEditButton()"
-      (onCancelButton)="onCancelButton()" 
+      (onCancelButton)="onCancelButton()"
+      (onSaveButton)="onSaveButton()" 
       *ngIf="userSelectedIndex !== undefined"
       [enableSaveButton]="enableSaveButton"
       >
