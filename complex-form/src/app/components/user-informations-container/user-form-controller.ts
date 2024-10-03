@@ -144,13 +144,13 @@ export class UserFormController {
 
         return this._fb.group({
             name: [dependent?.name, Validators.required],
-            age: [dependent?.age, Validators.required],
-            document: [dependent?.document, Validators.required],
+            age: [dependent?.age.toString(), Validators.required],
+            document: [dependent?.document.toString(), Validators.required],
         })
     }
 
 
-    fulFillDependentsList(userDependentsList: DependentsList) {
+    private fulFillDependentsList(userDependentsList: DependentsList) {
         userDependentsList.forEach((dependent) => {
             this.dependentsList.push(this.createDependentGroup(dependent));
         })
