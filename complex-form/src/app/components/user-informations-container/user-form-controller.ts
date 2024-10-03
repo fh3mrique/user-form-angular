@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PhoneTypeEnum } from "src/app/enums/phone-type.enum";
 import { IDependent } from "src/app/interfaces/user/dependent.interface";
 import { IUser } from "src/app/interfaces/user/user.interface";
+import { UserFormRawValueService } from "src/app/services/user-form-raw-value.service";
 import { AddressList } from "src/app/types/address-list";
 import { DependentsList } from "src/app/types/dependents-list";
 import { PhoneList } from "src/app/types/phone-list";
@@ -15,11 +16,15 @@ export class UserFormController {
     userForm!: FormGroup;
     private emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    private _fb = inject(FormBuilder);
+    private readonly _fb = inject(FormBuilder);
+    private readonly _userFormRawValueService = inject(UserFormRawValueService);
 
     constructor() {
         this.createUserForm();
+
+        this.watchUserFormValueChangesAndUpdateService();
     }
+    
 
     fullFillUserForm(user: IUser) {
         this.resetUserForm();
@@ -186,5 +191,10 @@ export class UserFormController {
 
             dependentsList: this._fb.array([]),
         })
+    }
+
+    private watchUserFormValueChangesAndUpdateService() {
+        this.userForm.valueChanges.subscribe(() => 
+            this._userFormRawValueService.userFormRawValue = this.userForm.getRawValue());
     }
 }
