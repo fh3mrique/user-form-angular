@@ -1,10 +1,10 @@
 export interface IuserForm {
-    generalInformations: IGeneralInformations
+    generalInformations: IUserFormGeneralInformations
     contactInformations: IContactInformations
     dependentsList: IUserFormDependent[]
 }
 
-export interface IGeneralInformations {
+export interface IUserFormGeneralInformations {
     name: string
     email: string
     country: string
